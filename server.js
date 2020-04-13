@@ -21,7 +21,7 @@ app.use(cors({origin: '*'}))
 //     res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Origin,Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,Authorization");
 //    next();
 // });
-
-app.listen(4000, ()=>{
+const appPort = process.env.PPRT ? process.env.PORT :4000 
+app.listen(appPort, ()=>{
 	console.log("listening to port 4000 !!");
 })
