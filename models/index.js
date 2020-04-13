@@ -5,8 +5,6 @@ mongoose.connect(db_url, {
 	keepAlive: true,
   	useNewUrlParser: true,
   	useUnifiedTopology: true
-}, (err, res)=>{
-	console.log("err", err,res)
 })
 
 mongoose.set("debug", true) 
