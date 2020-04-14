@@ -54,7 +54,7 @@ const getEmployeeById = async (req, res, next) => {
 
 const updateEmployee = async (req, res, next) => {
   try {
-    if(Object.keys(req.body).length && req.bosy.status){
+    if(Object.keys(req.body).length ==1  && req.body.status){
   	  await employeeModel.findOneAndUpdate({_id:req.params.id},{$set:{status:req.body.status}})
    	  return res.status(200).json({status:"Success", msg:"Status is successfully updated"})
 
@@ -65,7 +65,7 @@ const updateEmployee = async (req, res, next) => {
       return res.status(200).json(updatedData)
     }
   } catch (err) {
-    return res.status(400).json({status:"Failure", msg:"Error while updating Task"});
+    return res.status(400).json({status:"Failure", msg:"Error while updating Employee"});
   }
 }
 
