@@ -5,5 +5,4 @@ module.exports = (router) => {
     router.get('/todo/get', todo.getTask);
     router.put('/todo/update/:id', todo.updateTask);
     router.delete('/todo/delete/:id', todo.deleteTask);
-    router.put('/todo/status/:id', todo.updateStatus);
 }

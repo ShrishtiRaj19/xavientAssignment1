@@ -6,6 +6,5 @@ module.exports = (router) => {
     router.post('/employee/search', employee.searchEmployee);
     router.get('/employee/:id', employee.getEmployeeById);
     router.put('/employee/update/:id', employee.updateEmployee);
-    router.put('/employee/status/:id', employee.updateStatus);
     router.delete('/employee/delete/:id', employee.deleteEmployee);
 }

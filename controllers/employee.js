@@ -54,24 +54,21 @@ const getEmployeeById = async (req, res, next) => {
 
 const updateEmployee = async (req, res, next) => {
   try {
-    const updatedData = await employeeModel.findOneAndUpdate({_id:req.params.id}, req.body, {
-      new: true,
-    })
-    return res.status(200).json(updatedData)
+    if(Object.keys(req.body).length && req.bosy.status){
+  	  await employeeModel.findOneAndUpdate({_id:req.params.id},{$set:{status:req.body.status}})
+   	  return res.status(200).json({status:"Success", msg:"Status is successfully updated"})
+
+    }else{
+      const updatedData = await employeeModel.findOneAndUpdate({_id:req.params.id}, req.body, {
+        new: true,
+      })
+      return res.status(200).json(updatedData)
+    }
   } catch (err) {
     return res.status(400).json({status:"Failure", msg:"Error while updating Task"});
   }
 }
 
-
-const updateStatus = async (req, res, next) => {
-  try {
-  	await employeeModel.findOneAndUpdate({_id:req.params.id},{$set:{status:req.body.status}})
-   	return res.status(200).json({status:"Success", msg:"Status is successfully updated"})
-  } catch (err) {
-    return res.status(400).json({status:"Failure", msg:"Error while adding Task"});
-  }
-}
 
 const deleteEmployee = async(req, res, next)=>{
   try{
@@ -86,7 +83,6 @@ module.exports = {
 	getEmployee, 
 	createEmployee,
   updateEmployee,
-  updateStatus,
   searchEmployee,
   getEmployeeById,
   deleteEmployee

@@ -24,25 +24,20 @@ const createTask = async (req, res, next) => {
 
 const updateTask = async (req, res, next) => {
   try {
-    const updatedData = await todo.findOneAndUpdate({_id:req.params.id}, req.body, {
-      new: true,
-    })
-    return res.status(200).json(updatedData)
+    if(Object.keys(req.body).length == 1 && req.body.status){
+      await todo.findOneAndUpdate({_id:req.params.id},{$set:{status:req.body.status}})
+      return res.status(200).json({status:"Success", msg:"task is successfully completed"})
+    }else{
+        const updatedData = await todo.findOneAndUpdate({_id:req.params.id}, req.body, {
+          new: true,
+        })
+        return res.status(200).json(updatedData)
+    }
   } catch (err) {
     return res.status(400).json({status:"Failure", msg:"Error while updating Task"});
   }
 }
 
-
-const updateStatus = async (req, res, next) => {
-  try {
-    	await todo.findOneAndUpdate({_id:req.params.id},{$set:{status:req.body.status}})
-   		return res.status(200).json({status:"Success", msg:"task is successfully completed"})
-  	
-  } catch (err) {
-    return res.status(400).json({status:"Failure", msg:"Error while adding Task"});
-  }
-}
 
 const deleteTask = async(req, res, next)=>{
   try{
@@ -57,6 +52,5 @@ module.exports = {
 	getTask, 
 	createTask,
   updateTask,
-  updateStatus,
   deleteTask
 }
