@@ -7,7 +7,11 @@ var todoRoutes = require('./routes/todo')
 var employeeRoutes = require('./routes/employee')
 const router = express.Router();
 var cors = require("cors")
-
+//raghav start
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
+const fs = require('fs');
+//raghav end
 app.use(bodyparser.json())
 app.use('/api',router);
 todoRoutes(router);
@@ -25,3 +29,36 @@ const appPort = process.env.PORT ? process.env.PORT :4000
 app.listen(appPort, ()=>{
 	console.log("listening to port", appPort, " !!");
 })
+
+//raghav start
+
+app.post("/api/users", (req, res) => {
+    
+	const user = { name: req.body.name, password: req.body.password }
+	const users1=JSON.parse(fs.readFileSync('userlist.json', 'utf-8'));
+	users1.push(user);
+	fs.writeFileSync("userlist.json", JSON.stringify(users1)); 
+	res.status(201).send()
+  })
+
+app.post("/api/login", (req, res, next) => {
+	  
+const users=JSON.parse(fs.readFileSync('userlist.json', 'utf-8'));
+  // Authenticate user
+const logged_user = users.find(user => user.name === req.body.name)
+if (logged_user == null) {
+  return res.status(400).send('Cannot find user')
+}
+const passwordexists = users.find(user => user.password === req.body.password)     
+  if(passwordexists==null) {
+	  res.send('Not Allowed')
+  } else {
+		  //Authorize user
+  const user={name:req.body.name};
+  const accessToken=jwt.sign(user,process.env.ACCESS_TOKEN_SECRET) 
+  res.json({accessToken:accessToken}) 
+  
+  }
+ });
+
+//raghav end
