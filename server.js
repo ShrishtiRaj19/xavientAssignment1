@@ -21,7 +21,7 @@ employeeRoutes(router);
 app.use(cors({origin: '*'}))
 
 app.use(express.static(__dirname + './userlist.json'));
-console.log("express.static(__dirname + './userlist.json')")
+console.log("express.static(__dirname + './userlist.json')", express.static(__dirname + './userlist.json'))
 const appPort = process.env.PORT ? process.env.PORT :4000 
 app.listen(appPort, ()=>{
 	console.log("listening to port", appPort, " !!");
