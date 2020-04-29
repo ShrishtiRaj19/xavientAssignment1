@@ -34,7 +34,7 @@ app.post("/api/users", (req, res) => {
 	const user = { name: req.body.name, password: req.body.password }
 	const users1=JSON.parse(fs.readFileSync('userlist.json', 'utf-8'));
 	users1.push(user);
-	console.log("user1===", user1)
+	console.log("user1===", users1)
 	fs.writeFileSync("userlist.json", JSON.stringify(users1)); 
 	res.status(201).send()
   })
