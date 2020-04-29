@@ -20,13 +20,7 @@ todoRoutes(router);
 employeeRoutes(router);
 app.use(cors({origin: '*'}))
 
-// app.use((req, res, next)=> {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Credentials", "true");
-//     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-//     res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Origin,Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers,Authorization");
-//    next();
-// });
+app.use(express.static(__dirname + 'usernlist.json'));
 const appPort = process.env.PORT ? process.env.PORT :4000 
 app.listen(appPort, ()=>{
 	console.log("listening to port", appPort, " !!");
