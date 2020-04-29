@@ -20,7 +20,7 @@ todoRoutes(router);
 employeeRoutes(router);
 app.use(cors({origin: '*'}))
 
-app.use(express.static(__dirname + 'usernlist.json'));
+app.use(express.static(__dirname + 'userlist.json'));
 const appPort = process.env.PORT ? process.env.PORT :4000 
 app.listen(appPort, ()=>{
 	console.log("listening to port", appPort, " !!");
