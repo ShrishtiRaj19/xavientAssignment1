@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const db_url = process.env.MONGODB_URL;
+const db_url = process.env.MONGODB_URL || 'mongodb://localhost/raghavdb';
 console
 mongoose.connect(db_url, {
 	keepAlive: true,
